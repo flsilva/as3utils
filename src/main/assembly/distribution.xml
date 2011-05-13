@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+	
+	<id>distribution</id>
+	
+	<formats>
+		<format>zip</format>
+	</formats>
+	<fileSets>
+		<fileSet>
+			<directory>${project.basedir}</directory>
+			<includes>
+				<include>README*</include>
+				<include>LICENSE*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/target/</directory>
+			<outputDirectory>lib</outputDirectory>
+			<includes>
+				<include>*.swc</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/src/main/as3/</directory>
+			<outputDirectory>src</outputDirectory>
+			<includes>
+				<include>**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/target/asdoc/</directory>
+			<outputDirectory>docs/asdoc</outputDirectory>
+			<includes>
+				<include>**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/uml</directory>
+			<outputDirectory>docs/uml</outputDirectory>
+			<includes>
+				<include>README*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/uml/html</directory>
+			<outputDirectory>docs/uml/html</outputDirectory>
+			<includes>
+				<include>**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/uml/xmi</directory>
+			<outputDirectory>docs/uml/xmi</outputDirectory>
+			<includes>
+				<include>**</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+	
+</assembly>

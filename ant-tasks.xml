@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="AS3Utils Ant tasks to be used by the Maven Project.">
+	
+	<target name="put-asdoc-xml-into-swc">
+		
+		<zip destfile="target/${swc.full.name}" update="true">
+			<zipfileset dir="target/asdoc/tempdita" prefix="docs">
+				<include name="${include.xml.files.pattern}"/>
+				<include name="packages.dita"/>
+			</zipfileset>
+		</zip>
+		
+	</target>
+	
+</project>

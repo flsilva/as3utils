@@ -1,0 +1,10 @@
+h2. AS3Utils CHANGELOG
+
+Note: dates are in DD.MM.YYYY format
+
+
+Changes in version 0.1 (xx.xx.2011)
+-----------------------------------
+
+* First Release.
+    -> Added main framework package: org.as3utils - with implementations such as: ArrayUtil, DrawUtil, MathUtil, NumberUtil, StringUtil, etc. Potential for future growing (expected additions).

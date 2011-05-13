@@ -1,0 +1,4 @@
+h2. AS3Utils
+
+AS3Utils is an utility library with common implementations (e.g. StringUtil, ArrayUtil, RandomUtil) for Flash/Flex/AIR AS3 daily work.
+It aims to be a base utility library for basically any Flash/Flex/AIR AS3 application or framework.

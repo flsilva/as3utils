@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<componentPackage>
+
+	<component id="org.as3utils:ArrayUtil" 					class="org.as3utils.ArrayUtil" />
+	<component id="org.as3utils:ByteConversionUtil" 		class="org.as3utils.ByteConversionUtil" />
+	<component id="org.as3utils:DrawUtil" 					class="org.as3utils.DrawUtil" />
+	<component id="org.as3utils:MathUtil" 					class="org.as3utils.MathUtil" />
+	<component id="org.as3utils:NumberUtil" 				class="org.as3utils.NumberUtil" />
+	<component id="org.as3utils:RandomUtil" 				class="org.as3utils.RandomUtil" />
+	<component id="org.as3utils:ReflectionUtil" 			class="org.as3utils.ReflectionUtil" />
+	<component id="org.as3utils:StringUtil" 				class="org.as3utils.StringUtil" />
+
+</componentPackage>

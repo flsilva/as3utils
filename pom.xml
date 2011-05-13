@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.as3utils</groupId>
+	<artifactId>as3utils</artifactId>
+	<name>as3utils</name>
+	<url>http://as3utils.org</url>
+	<version>0.1-SNAPSHOT</version>
+	<packaging>swc</packaging>
+	<inceptionYear>2010</inceptionYear>
+	
+	<description>
+		AS3Utils is a utility library with common implementations (e.g. StringUtil, ArrayUtil, RandomUtil) for Flash/Flex/AIR AS3 daily work.
+		It aims to be a base utility library for basically any Flash/Flex/AIR AS3 application or framework.
+	</description>
+	
+	<developers>
+		<developer>
+			<id>flsilva</id>
+			<name>Flavio Silva</name>
+			<email>contact [at] flsilva.com</email>
+			<url>http://flsilva.com</url>
+			<roles>
+				<role>Founder</role>
+				<role>Architect</role>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+	
+	<properties>
+		<!--  GENERAL -->
+		<maven.version>3.0</maven.version>
+		<default.goal>install</default.goal>
+		
+		<!-- PLUGIN -->
+		<maven.site.plugin.version>3.0-beta-2</maven.site.plugin.version>
+		<maven.assembly.plugin.version>2.2</maven.assembly.plugin.version>
+		<maven.release.plugin.version>2.1</maven.release.plugin.version>
+		<maven.project.info.reports.plugin.version>2.3.1</maven.project.info.reports.plugin.version>
+		<maven.surefire.report.plugin.version>2.7.1</maven.surefire.report.plugin.version>
+		<maven.antrun.plugin.version>1.6</maven.antrun.plugin.version>
+		<flexmojos.maven.plugin.version>4.0-beta-5</flexmojos.maven.plugin.version>
+		<flex.pmd.maven.plugin.version>1.2</flex.pmd.maven.plugin.version>
+		<flex.pmd.cpd.maven.plugin.version>1.0.RC5</flex.pmd.cpd.maven.plugin.version>
+		<flex.pmd.metrics.maven.plugin.version>1.0</flex.pmd.metrics.maven.plugin.version>
+		
+		<!-- DEPENDENCIES -->
+		<flex.version>4.1.0.16076</flex.version>
+		<flexunit.version>[,5.0]</flexunit.version>
+		<as3coreaddendum.version>0.1-SNAPSHOT</as3coreaddendum.version>
+		
+		<!-- SWC -->
+		<src.directory>src/main/as3</src.directory>
+		<src-test.directory>src/test/as3</src-test.directory>
+		<configuration-report>true</configuration-report>
+		
+		<!--<compc.load-config>config.xml</compc.load-config>-->
+		<compc.debug>true</compc.debug>
+		<compc.directory>false</compc.directory>
+		<compc.disable-incremental-optimizations>true</compc.disable-incremental-optimizations>
+		<compc.dump-config-attach>true</compc.dump-config-attach>
+		<compc.incremental>false</compc.incremental>
+		<compc.link-report>true</compc.link-report>
+		<compc.optimize>true</compc.optimize>
+		<compc.show-warnings>true</compc.show-warnings>
+		<compc.show-actionscript-warnings>true</compc.show-actionscript-warnings>
+		<compc.strict>true</compc.strict>
+		<compc.target-player>10.0</compc.target-player>
+		<compc.warn-bad-nan-comparison>true</compc.warn-bad-nan-comparison>
+		
+		<!-- ANT: PUT ASDOC XML INTO SWC -->
+		<ant-parameter.include-asdoc-xml-files-pattern>*org.as3utils.*</ant-parameter.include-asdoc-xml-files-pattern>
+		
+		<!-- ASDOC -->
+		<asdoc.date-in-footer>true</asdoc.date-in-footer>
+		<asdoc.footer>Copyright 2010-2011 Flavio Silva - http://flsilva.com</asdoc.footer>
+		<asdoc.keep-xml>true</asdoc.keep-xml>
+		<asdoc.left-frameset-width>280</asdoc.left-frameset-width>
+		<asdoc.main-title>AS3Utils API Documentation</asdoc.main-title>
+		<asdoc.name>AS3Utils ASDocs</asdoc.name>
+		<asdoc.window-title>AS3Utils API Documentation</asdoc.window-title>
+		
+		<!-- TESTING -->
+		<test.coverage>true</test.coverage>
+		<flex.skipTests>false</flex.skipTests>
+	</properties>
+	
+	<prerequisites>
+		<maven>${maven.version}</maven>
+	</prerequisites>
+	
+	<scm>
+		<url>http://github.com/flsilva/as3utils</url>
+		<connection>scm:git:http://github.com/flsilva/as3utils.git</connection>
+		<developerConnection>scm:git:git@github.com:flsilva/as3utils.git</developerConnection>
+	</scm>
+	<!--
+	<issueManagement>
+		<system>github</system>
+		<url>http://github.com/flsilva/as3utils/issues</url>
+	</issueManagement>
+	-->
+	<distributionManagement>
+		<repository>
+			<id>github-flsilva-as3-maven-release-repository</id>
+			<url>file:///${project.basedir}/../../../maven-repository-pages/repository/releases/</url>
+			<!--<url>${project.basedir}/../maven-repository-pages/repository/releases/</url>-->
+		</repository>
+		<snapshotRepository>
+			<id>github-flsilva-as3-maven-snapshot-repository</id>
+			<url>file:///${project.basedir}/../../../maven-repository-pages/repository/snapshots/</url>
+			<!--<url>${project.basedir}/../maven-repository-pages/repository/snapshots/</url>-->
+		</snapshotRepository>
+	</distributionManagement>
+	
+	<repositories>
+		
+		<repository>
+			<id>flex-mojos-repository</id>
+			<url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		
+	</repositories>
+	
+	<pluginRepositories>
+		
+		<pluginRepository>
+			<id>flexmojos-repository</id>
+			<url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		
+		<pluginRepository>
+			<id>flexpmd.opensource.adobe</id>
+			<name>FlexPMD repository on opensource.adobe.com</name>
+			<url>http://opensource.adobe.com/svn/opensource/flexpmd/maven-repository/release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		
+	</pluginRepositories>
+	
+	<dependencies>
+		
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.version}</version>
+			<type>pom</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.adobe.flex</groupId>
+			<artifactId>compiler</artifactId>
+			<version>${flex.version}</version>
+			<type>pom</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.adobe.flexunit</groupId>
+			<artifactId>flexunit</artifactId>
+			<version>${flexunit.version}</version>
+			<type>swc</type>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.as3coreaddendum</groupId>
+			<artifactId>as3coreaddendum</artifactId>
+			<version>${as3coreaddendum.version}</version>
+			<type>swc</type>
+		</dependency>
+		
+	</dependencies>
+	
+	<build>
+		
+		<sourceDirectory>${src.directory}</sourceDirectory>
+		<testSourceDirectory>${src-test.directory}</testSourceDirectory>
+		<defaultGoal>${default.goal}</defaultGoal>
+		
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonatype.flexmojos</groupId>
+					<artifactId>flexmojos-maven-plugin</artifactId>
+					<version>${flexmojos.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${maven.site.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven.assembly.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven.release.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>${maven.project.info.reports.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-report-plugin</artifactId>
+					<version>${maven.surefire.report.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>com.adobe.ac</groupId>
+					<artifactId>flex-pmd-maven-plugin</artifactId>
+					<version>${flex.pmd.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>com.adobe.ac</groupId>
+					<artifactId>flex-pmd-cpd-maven-plugin</artifactId>
+					<version>${flex.pmd.cpd.maven.plugin.version}</version>
+					<configuration>
+						<minimumTokenCount>50</minimumTokenCount>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.adobe.ac</groupId>
+					<artifactId>flex-pmd-metrics-maven-plugin</artifactId>
+					<version>${flex.pmd.metrics.maven.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${maven.antrun.plugin.version}</version>
+				</plugin>
+				<!--<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>-->
+			</plugins>
+		</pluginManagement>
+		
+		<plugins>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId> 
+							<artifactId>maven-project-info-reports-plugin</artifactId> 
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-report-plugin</artifactId>
+						</plugin>
+						<!--<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>cobertura-maven-plugin</artifactId>
+						</plugin>-->
+						<plugin>
+							<groupId>com.adobe.ac</groupId>
+							<artifactId>flex-pmd-maven-plugin</artifactId>
+						</plugin>
+						<plugin>
+							<groupId>com.adobe.ac</groupId>
+							<artifactId>flex-pmd-cpd-maven-plugin</artifactId>
+							<configuration>
+								<minimumTokenCount>50</minimumTokenCount>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>com.adobe.ac</groupId>
+							<artifactId>flex-pmd-metrics-maven-plugin</artifactId>
+						</plugin>
+					</reportPlugins>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				
+				<dependencies>
+					<dependency>
+						<groupId>com.adobe.flex</groupId>
+						<artifactId>compiler</artifactId>
+						<version>${flex.version}</version>
+						<type>pom</type>
+					</dependency>
+					<dependency>
+						<groupId>org.as3coreaddendum</groupId>
+						<artifactId>as3coreaddendum</artifactId>
+						<version>${as3coreaddendum.version}</version>
+						<type>swc</type>
+					</dependency>
+				</dependencies>
+				
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>asdoc</goal>
+						</goals>
+						<configuration>
+							<!--<packageDescriptionFile>asdoc-package-description.xml</packageDescriptionFile>-->
+							<dateInFooter>${asdoc.date-in-footer}</dateInFooter>
+							<footer>${asdoc.footer}</footer>
+							<keepXml>${asdoc.keep-xml}</keepXml>
+							<leftFramesetWidth>${asdoc.left-frameset-width}</leftFramesetWidth>
+							<mainTitle>${asdoc.main-title}</mainTitle>
+							<name>${asdoc.name}</name>
+							<windowTitle>${asdoc.window-title}</windowTitle>
+							
+							<docNamespaces>
+								<namespace>http://as3utils.org</namespace>
+							</docNamespaces>
+						</configuration>
+					</execution>
+				</executions>
+				
+				<configuration>
+					<!--<loadConfig>${compc.load-config}</loadConfig>-->
+					<configurationReport>${configuration-report}</configurationReport>
+					<coverage>${test.coverage}</coverage>
+					<debug>${compc.debug}</debug>
+					<directory>${compc.directory}</directory>
+					<disableIncrementalOptimizations>${compc.disable-incremental-optimizations}</disableIncrementalOptimizations>
+					<dumpConfigAttach>${compc.dump-config-attach}</dumpConfigAttach>
+					<incremental>${compc.incremental}</incremental>
+					<linkReport>${compc.link-report}</linkReport>
+					<!--<minimumSupportedVersion>${flex.version}</minimumSupportedVersion>-->
+					<optimize>${compc.optimize}</optimize>
+					<showWarnings>${compc.show-warnings}</showWarnings>
+					<strict>${compc.strict}</strict>
+					<targetPlayer>${compc.target-player}</targetPlayer>
+					
+					<namespaces>
+						<namespace>
+							<uri>http://as3utils.org</uri>
+							<manifest>manifest.xml</manifest>
+						</namespace>
+					</namespaces>
+					<includeNamespaces>
+						<namespace>http://as3utils.org</namespace>
+					</includeNamespaces>
+					
+					<compilerWarnings>
+						<show-actionscript-warnings>${compc.show-actionscript-warnings}</show-actionscript-warnings>
+						<warn-bad-nan-comparison>${compc.warn-bad-nan-comparison}</warn-bad-nan-comparison>
+					</compilerWarnings>
+					
+					<localesCompiled>
+						<locale>en_US</locale>
+					</localesCompiled>
+					
+				</configuration>
+				
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>put-asdoc-xml-into-swc</id>
+						<phase>install</phase>
+						<configuration>
+							<target>
+								<ant antfile="ant-tasks.xml">
+									<target name="put-asdoc-xml-into-swc" />
+									<property name="swc.full.name" value="${project.artifactId}-${project.version}.${project.packaging}" />
+									<property name="include.xml.files.pattern" value="${ant-parameter.include-asdoc-xml-files-pattern}" />
+								</ant>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/distribution.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<preparationGoals>clean install assembly:single</preparationGoals>
+				</configuration>
+			</plugin>
+			
+		</plugins>
+		
+	</build>
+	
+</project>
