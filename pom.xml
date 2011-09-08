@@ -76,12 +76,13 @@
 		
 		<!-- ASDOC -->
 		<asdoc.date-in-footer>true</asdoc.date-in-footer>
-		<asdoc.footer>Copyright 2010-2011 Flavio Silva - http://flsilva.com</asdoc.footer>
+		<asdoc.footer>"Copyright 2010-2011 Flavio Silva - http://flsilva.com"</asdoc.footer>
 		<asdoc.keep-xml>true</asdoc.keep-xml>
 		<asdoc.left-frameset-width>280</asdoc.left-frameset-width>
-		<asdoc.main-title>AS3Utils API Documentation</asdoc.main-title>
-		<asdoc.name>AS3Utils ASDocs</asdoc.name>
-		<asdoc.window-title>AS3Utils API Documentation</asdoc.window-title>
+		<asdoc.main-title>"AS3Utils API Documentation"</asdoc.main-title>
+		<asdoc.name>"AS3Utils ASDocs"</asdoc.name>
+		<asdoc.window-title>"AS3Utils API Documentation"</asdoc.window-title>
+		<asdoc.output>target/asdoc</asdoc.output>
 		
 		<!-- TESTING -->
 		<test.coverage>true</test.coverage>
@@ -317,7 +318,8 @@
 						<type>swc</type>
 					</dependency>
 				</dependencies>
-				
+				<!--
+				ASDOC EXECUTED FROM FLEXMOJOS DOES NOT WORKS CORRECTLY, HTML TAGS NOT FORMATTED. USING ANT UNTIL BUG IS FIXED.
 				<executions>
 					<execution>
 						<phase>install</phase>
@@ -325,7 +327,6 @@
 							<goal>asdoc</goal>
 						</goals>
 						<configuration>
-							<!--<packageDescriptionFile>asdoc-package-description.xml</packageDescriptionFile>-->
 							<dateInFooter>${asdoc.date-in-footer}</dateInFooter>
 							<footer>${asdoc.footer}</footer>
 							<keepXml>${asdoc.keep-xml}</keepXml>
@@ -340,7 +341,7 @@
 						</configuration>
 					</execution>
 				</executions>
-				
+				-->
 				<configuration>
 					<!--<loadConfig>${compc.load-config}</loadConfig>-->
 					<configurationReport>${configuration-report}</configurationReport>
@@ -384,6 +385,27 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
+					<!-- USING ANT TO GENERATE ASDOC DUE TO BUG IN EXECUTION FROM FLEXMOJOS (HTML TAGS NOT FORMATTED). -->
+					<execution>
+						<id>generate-asdoc</id>
+						<phase>install</phase>
+						<configuration>
+							<target>
+								<ant antfile="ant-tasks.xml">
+									<target name="generate-asdoc" />
+									<property name="src.directory" value="${src.directory}" />
+									<property name="asdoc.main-title" value="${asdoc.main-title}" />
+									<property name="asdoc.window-title" value="${asdoc.window-title}" />
+									<property name="asdoc.footer" value="${asdoc.footer}" />
+									<property name="asdoc.left-frameset-width" value="${asdoc.left-frameset-width}" />
+									<property name="asdoc.output" value="${asdoc.output}" />
+								</ant>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
 					<execution>
 						<id>put-asdoc-xml-into-swc</id>
 						<phase>install</phase>
@@ -406,6 +428,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>assembly</id>
+						<phase>install</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<descriptors>
 						<descriptor>src/main/assembly/distribution.xml</descriptor>

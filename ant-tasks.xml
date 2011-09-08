@@ -13,4 +13,30 @@
 		
 	</target>
 	
+	<target name="clean-asdoc" description="Delete the current ASDoc if exists.">
+	
+		<delete dir="${asdoc.output}" />
+		<mkdir  dir="${asdoc.output}" />
+	
+	</target>
+	
+	<target name="generate-asdoc" description="Create ASDOC files.">
+		
+		<antcall target="clean-asdoc">
+			<param name="asdoc.output" value="${asdoc.output}"/>
+		</antcall>
+		
+		<exec executable="D:/flash-platform/sdk/flex_sdk_4.1.0.16076/bin/asdoc.exe" failonerror="true" >
+			<arg line="-doc-sources ${src.directory}"/>
+			<arg line="-library-path dependencies/"/>
+			<arg line="-main-title ${asdoc.main-title}" />
+			<arg line="-window-title ${asdoc.window-title}" />
+			<arg line="-footer ${asdoc.footer}" />
+			<arg line="-keep-xml=true" />
+			<arg line="-left-frameset-width ${asdoc.left-frameset-width}" />
+			<arg line="-output ${asdoc.output}" />
+		</exec>
+	
+	</target>
+	
 </project>

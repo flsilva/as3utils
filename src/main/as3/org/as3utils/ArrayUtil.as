@@ -124,6 +124,33 @@ package org.as3utils {
 			if (isEmpty(array)) return false;
 			return array.indexOf(element) != -1;
 		}
+		//TODO:asdoc e ordenar
+		public static function containsDuplication(array:Array): Boolean
+		{
+			return getDuplicate(array).length > 0;
+		}
+		
+		public static function getDuplicate(array:Array): Array
+		{
+			if (isEmpty(array)) return [];
+			
+			var duplicate:Array = [];
+			var temp:Array = [];
+			var element:*;
+			var i:int;
+			var length:int = array.length;
+			
+			for (i = 0; i < length; i++)
+			{
+				element = array[i];
+				
+				if (contains(temp, element)) duplicate.push(element);
+				
+				temp.push(element); 
+			}
+			
+			return duplicate;
+		}
 
 		/**
 		 * Returns <code>true</code> if the array contains only elements of the <code>type</code> argument.
@@ -988,7 +1015,8 @@ package org.as3utils {
 			
 			return newArray;
 		}
-
+		//TODO:_containsOnlyType() and _containsType() are equal. refactor.
+		//TODO: pensar em otimizar performance matando esse if daqui dos metodos e colocando no momento de passar o metodo. ou seja, criar um método que usa strict e outro q nao usa.
 		/**
 		 * @private
 		 */
