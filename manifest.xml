@@ -3,6 +3,7 @@
 <componentPackage>
 
 	<component id="org.as3utils:ArrayUtil" 					class="org.as3utils.ArrayUtil" />
+	<component id="org.as3utils:BooleanUtil" 				class="org.as3utils.BooleanUtil" />
 	<component id="org.as3utils:ByteConversionUtil" 		class="org.as3utils.ByteConversionUtil" />
 	<component id="org.as3utils:DrawUtil" 					class="org.as3utils.DrawUtil" />
 	<component id="org.as3utils:EquatableUtil" 				class="org.as3utils.EquatableUtil" />

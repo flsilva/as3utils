@@ -28,6 +28,7 @@
 package org.as3utils
 {
 	
+	import flash.geom.Rectangle;
 	import flash.display.Shape;
 	import flash.errors.IllegalOperationError;
 	
@@ -49,35 +50,15 @@ package org.as3utils
 			throw new IllegalOperationError("DrawUtil is a static class and shouldn't be instantiated.");
 		}
 		
-		/**
-		 * Returns a <code>Shape</code> object using the <code>Shape.Graphics.drawRect</code> method.
-		 * 
-		 * @example
-		 * 
-		 * <listing version="3.0">
-		 * import flash.display.Shape;
-		 * import org.as3coreaddendum.utils.DrawUtil;
-		 * 
-		 * var s:Shape = DrawUtil.rect(0, 0, 250, 250, 0xFF0000);
-		 * addChild(s);
-		 * </listing>
-		 * 
-		 * @param  	x 			a number indicating the horizontal position relative to the registration point of the <code>Shape</code> object (in pixels).
-		 * @param  	y 			a number indicating the vertical position relative to the registration point of the <code>Shape</code> object (in pixels).
-		 * @param  	w 			the width of the <code>Shape</code> (in pixels).
-		 * @param  	h 			the height of the <code>Shape</code> (in pixels).
-		 * @param 	color 		the color of the <code>Shape</code>.
-		 * @param 	alpha 		the alpha of the <code>Shape</code>.
-		 * @return 	a <code>Shape</code> object using the <code>Shape.Graphics.drawRect</code> method.
-		 */
-		public static function rect(x:Number, y:Number, w:Number, h:Number, color:Number = 0xFFFFFF, alpha:Number = 1):Shape
+		public static function border(bounds:Rectangle, thickness:Number = 1, color:uint = 0xFFFFFF, alpha:Number = 1):Shape
 		{
 			var s:Shape = new Shape();
 			
-			s.graphics.beginFill(color, 1);
-			s.graphics.drawRect(x, y, w, h);
-			s.graphics.endFill();
-			s.alpha = alpha;
+			s.graphics.lineStyle(thickness, color, alpha);
+			s.graphics.lineTo(bounds.width, 0);
+			s.graphics.lineTo(bounds.width, bounds.height);
+			s.graphics.lineTo(0, bounds.height);
+			s.graphics.lineTo(0, 0);
 			
 			return s;
 		}
@@ -102,7 +83,7 @@ package org.as3utils
 		 * @param 	alpha 		the alpha of the <code>Shape</code>.
 		 * @return 	a <code>Shape</code> object using the <code>Shape.Graphics.drawCircle</code> method.
 		 */
-		public static function circ(x:Number, y:Number, radius:Number, color:Number = 0xFFFFFF, alpha:Number = 1):Shape
+		public static function circ(x:Number, y:Number, radius:Number, color:uint = 0xFFFFFF, alpha:Number = 1):Shape
 		{
 			var s:Shape = new Shape();
 			
@@ -110,6 +91,38 @@ package org.as3utils
 			s.graphics.drawCircle(x, y, radius);
 			s.graphics.endFill();
 			s.alpha = alpha;
+			
+			return s;
+		}
+		
+		/**
+		 * Returns a <code>Shape</code> object using the <code>Shape.Graphics.drawRect</code> method.
+		 * 
+		 * @example
+		 * 
+		 * <listing version="3.0">
+		 * import flash.display.Shape;
+		 * import org.as3coreaddendum.utils.DrawUtil;
+		 * 
+		 * var s:Shape = DrawUtil.rect(0, 0, 250, 250, 0xFF0000);
+		 * addChild(s);
+		 * </listing>
+		 * 
+		 * @param  	x 			a number indicating the horizontal position relative to the registration point of the <code>Shape</code> object (in pixels).
+		 * @param  	y 			a number indicating the vertical position relative to the registration point of the <code>Shape</code> object (in pixels).
+		 * @param  	w 			the width of the <code>Shape</code> (in pixels).
+		 * @param  	h 			the height of the <code>Shape</code> (in pixels).
+		 * @param 	color 		the color of the <code>Shape</code>.
+		 * @param 	alpha 		the alpha of the <code>Shape</code>.
+		 * @return 	a <code>Shape</code> object using the <code>Shape.Graphics.drawRect</code> method.
+		 */
+		public static function rect(x:Number, y:Number, w:Number, h:Number, color:uint = 0xFFFFFF, alpha:Number = 1):Shape
+		{
+			var s:Shape = new Shape();
+			
+			s.graphics.beginFill(color, alpha);
+			s.graphics.drawRect(x, y, w, h);
+			s.graphics.endFill();
 			
 			return s;
 		}
