@@ -1,9 +1,9 @@
 h2. AS3Utils CHANGELOG
 
-Note: dates are in DD.MM.YYYY format
+Note: dates are in YYYY.MM.DD format
 
 
-Changes in version 0.1 (xx.xx.2011)
+Changes in version 1.0 (2011.10.10)
 -----------------------------------
 
 * First Release.

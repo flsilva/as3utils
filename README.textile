@@ -2,3 +2,18 @@ h2. AS3Utils
 
 AS3Utils is an utility library with common implementations (e.g. StringUtil, ArrayUtil, RandomUtil) for Flash/Flex/AIR AS3 daily work.
 It aims to be a base utility library for basically any Flash/Flex/AIR AS3 application or framework.
+
+For more information visit <a href="http://as3utils.org" target="_blank">as3utils.org</a>.
+
+h3. Build
+
+The build is done using Apache Maven 3.
+Basic commands working:
+
+mvn clean
+mvn compile
+mvn test
+mvn install
+
+To run unit tests the standalone flashplayer (debug version) must be launched. If you don't have it in your PATH, when running commands you can use the following variable to point to it:
+-Dflex.flashPlayer.command=ABSOLUTE_PATH_HERE
